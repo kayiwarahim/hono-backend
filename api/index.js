@@ -6,6 +6,7 @@ import { cors } from 'hono/cors'  // <-- Import CORS middleware
 import homeRoutes from '../routes/home.js'
 import packagesRoutes from '../routes/packages.js'
 import payments from '../routes/payments.js'
+import identify from '../routes/identify.js'
 
 dotenv.config()
 
@@ -20,6 +21,7 @@ packagesRoutes(app)
 
 // Protected route
 app.route('/payments', payments)
+app.route('/identify', identify)
 
 const handler = handle(app)
 

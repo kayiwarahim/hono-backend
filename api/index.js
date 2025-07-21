@@ -1,22 +1,25 @@
 import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
 import dotenv from 'dotenv'
+import { cors } from 'hono/cors'  // <-- Import CORS middleware
 
 import homeRoutes from '../routes/home.js'
 import packagesRoutes from '../routes/packages.js'
-import payments  from '../routes/payments.js'
+import payments from '../routes/payments.js'
 
 dotenv.config()
 
 const app = new Hono().basePath('/api')
 
+// Enable CORS for all routes, allowing all origins
+app.use('*', cors())
+
 // Public routes
 homeRoutes(app)
 packagesRoutes(app)
-  
-// Protected route
-app.route('/api/payments', payments)
 
+// Protected route
+app.route('/payments', payments)
 
 const handler = handle(app)
 

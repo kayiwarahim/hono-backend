@@ -1,20 +1,21 @@
 import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
 import dotenv from 'dotenv'
+
 import homeRoutes from '../routes/home.js'
-import packageRoutes from '../routes/packages.js'
-import { requireApiKey } from '../middleware/auth.js'
+import packagesRoutes from '../routes/packages.js'
+import paymentRoutes from '../routes/payment.js'
 
 dotenv.config()
 
 const app = new Hono().basePath('/api')
 
-// 🔐 Secure routes
-app.use('*', requireApiKey)
-
-// Register routes
+// Public routes
 homeRoutes(app)
-packageRoutes(app)
+packagesRoutes(app)
+
+// Protected route
+paymentRoutes(app)
 
 const handler = handle(app)
 

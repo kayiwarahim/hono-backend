@@ -13,13 +13,18 @@ dotenv.config()
 const app = new Hono().basePath('/api')
 
 // Enable CORS for all routes, allowing all origins
-app.use('*', cors())
+app.use('*', cors({
+  origin: ['http://localhost:5173', 'https://wifi-frontend-one.vercel.app'],
+  credentials: true,
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization']
+}))
 
 // Public routes
-homeRoutes(app)
-packagesRoutes(app)
+app.route('/', homeRoutes)
+app.route('/packages', packagesRoutes)
 
-// Protected route
+// Protected routes
 app.route('/payments', payments)
 app.route('/identify', identify)
 

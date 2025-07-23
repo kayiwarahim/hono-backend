@@ -1,3 +1,5 @@
+import { Hono } from 'hono'
+
 const packages = [
   { label: "24 Hours", value: 1000, price: "UGX 1000", duration: "Full Day", speed: "3 Mbps", color: "from-purple-500 to-indigo-600" },
   { label: "7 Days", value: 6000, price: "UGX 6000", duration: "Full Week", speed: "4 Mbps", color: "from-blue-500 to-cyan-600" },
@@ -7,6 +9,8 @@ const packages = [
   { label: "180 Days", value: 120000, price: "UGX 120000", duration: "Full Half Year", speed: "7 Mbps", color: "from-purple-500 to-violet-600" },
 ]
 
-export default (app) => {
-  app.get('/packages', (c) => c.json(packages))
-}
+const packagesRouter = new Hono()
+
+packagesRouter.get('/', (c) => c.json(packages))
+
+export default packagesRouter

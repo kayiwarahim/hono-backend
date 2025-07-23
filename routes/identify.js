@@ -3,7 +3,7 @@ import { Hono } from 'hono'
 
 const identify = new Hono()
 
-identify.post('/', async (c) => {
+identify.post('/identify-device', async (c) => {
   const json = await c.req.json()
   const { deviceId } = json
 

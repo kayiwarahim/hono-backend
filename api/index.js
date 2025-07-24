@@ -17,7 +17,7 @@ app.use('*', cors({
   origin: ['http://localhost:5173', 'https://wifi-frontend-one.vercel.app'],
   credentials: true,
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowHeaders: ['Content-Type', 'Authorization']
+  allowHeaders: ['Content-Type', 'x-api-key', 'Authorization']
 }))
 
 // Public routes

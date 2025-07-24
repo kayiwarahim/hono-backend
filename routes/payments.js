@@ -9,8 +9,6 @@ const payments = new Hono()
 // Require API Key for all routes in this group
 payments.use('*', requireApiKey)
 
-// Initiate a payment
-// Test number for development: +256752225375
 payments.post('/initiate', async (c) => {
   try {
     const body = await c.req.json()
